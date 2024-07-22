@@ -1,1 +1,1 @@
-This project is a website called "Jimma Coffee Express." The website is built using HTML, CSS, and PHP. It allows users to purchase coffee from Jimma and have it delivered to various cities across Ethiopia.
+This project is a website called "Jimma Coffee Express." The website is built using HTML, CSS, javascript and PHP. It allows users to purchase coffee from Jimma and have it delivered to various cities across Ethiopia.
