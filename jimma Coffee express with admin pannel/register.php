@@ -40,7 +40,7 @@
 			else{
 				$insert_user = $conn->prepare("INSERT INTO `users`(id,name,email,password) VALUES(?,?,?,?)");
 				$insert_user->execute([$id,$name,$email,$pass]);
-				header('location: home.php');
+				header('location: index.php');
 				$select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ? AND password = ?");
 				$select_user->execute([$email, $pass]);
 				$row = $select_user->fetch(PDO::FETCH_ASSOC);

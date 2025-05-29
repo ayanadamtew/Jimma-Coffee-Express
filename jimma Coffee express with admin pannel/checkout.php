@@ -43,10 +43,31 @@ if (isset($_POST['place_order'])) {
 		}
 	} elseif ($varify_cart->rowCount() > 0) {
 		while ($f_cart = $varify_cart->fetch(PDO::FETCH_ASSOC)) {
-			$insert_order = $conn->prepare("INSERT INTO `orders`(id, user_id, name, number, email, address, address_type, method, product_id, price, qty) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
-			$insert_order->execute([unique_id(), $user_id, $name, $number, $email, $address, $address_type, $method, $f_cart['product_id'], $f_cart['price'], $f_cart['qty']]);
-			header('location:order.php');
+			$insert_order = $conn->prepare("INSERT INTO `orders`(
+        id, user_id, name, number, email, address, address_type, method, product_id, price, qty, date, payment_status, status
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+			$insert_order->execute([
+				unique_id(),            // id
+				$user_id,               // user_id
+				$name,                  // name
+				$number,                // number
+				$email,                 // email
+				$address,               // address
+				$address_type,          // address_type
+				$method,                // method
+				$f_cart['product_id'],  // product_id
+				$f_cart['price'],       // price
+				$f_cart['qty'],         // qty
+				date('Y-m-d H:i:s'),    // date
+				'in progress',          // payment_status
+				'pending'               // order_status
+			]);
 		}
+
+		header('Location: order.php');
+        exit;
+
 		if ($insert_order) {
 			$delete_cart_id = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
 			$delete_cart_id->execute([$user_id]);
@@ -79,7 +100,7 @@ if (isset($_POST['place_order'])) {
 			<h1>checkout summary</h1>
 		</div>
 		<div class="title2">
-			<a href="home.php">home </a><span>/ checkout summary</span>
+			<a href="index.php">home </a><span>/ checkout summary</span>
 		</div>
 		<section class="checkout">
 			<div class="title">

@@ -1,0 +1,207 @@
+/* css/admin_orders.css */
+
+@import url('../admin/admin_style.css'); /* Import your base admin styles first */
+
+/* --- Specific Styles for Admin Orders Page --- */
+
+.order-controls {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    justify-content: space-between; /* Space out items */
+    align-items: flex-end; /* Align inputs/selects to bottom */
+    background-color: var(--box-bg-color);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.order-controls .control-group {
+    flex: 1 1 280px; /* Allows flexibility for items */
+    min-width: 200px; /* Minimum width for each group */
+}
+
+.order-controls label {
+    font-size: 1.4rem;
+    color: var(--light-text-color);
+    margin-bottom: 0.8rem;
+    display: block;
+    font-weight: 500;
+}
+
+.order-controls input[type="search"],
+.order-controls select {
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.8rem;
+    font-size: 1.6rem;
+    color: var(--text-color);
+    background-color: var(--bg-color); /* Lighter background for controls */
+    box-shadow: var(--inner-shadow);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.order-controls input[type="search"]:focus,
+.order-controls select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(108, 92, 231, 0.25);
+}
+
+.order-controls .btn-group {
+    display: flex;
+    gap: 1rem;
+    width: 100%; /* Take full width on small screens */
+    margin-top: 1rem; /* Spacing from inputs */
+}
+
+.order-controls .btn {
+    flex: 1; /* Make buttons take equal space */
+    padding: 1.2rem 1.5rem;
+    font-size: 1.6rem;
+    text-transform: capitalize;
+}
+
+.order-controls .btn.clear-btn {
+    background-color: var(--danger-color);
+    color: var(--white);
+}
+
+.order-controls .btn.clear-btn:hover {
+    background-color: #c0392b; /* Darker red on hover */
+    transform: translateY(-2px);
+}
+
+/* --- Order Box Enhancements --- */
+.order-container .box {
+    position: relative;
+    box-shadow: var(--shadow);
+    border-radius: 10px;
+    padding: 2.5rem;
+    background-color: var(--box-bg-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    justify-content: space-between; /* Push form to bottom */
+}
+
+.order-container .box:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+
+/* Status badge styling */
+.order-container .box .status-badge {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.8rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    box-shadow: var(--inner-shadow);
+}
+
+/* Specific status colors (using CSS variables) */
+.order-container .box .status-badge.pending {
+    background-color: rgba(255, 193, 7, 0.15); /* Light yellow */
+    color: var(--warning-color);
+}
+.order-container .box .status-badge.in-progress {
+    background-color: rgba(9, 132, 227, 0.15); /* Light blue from accent */
+    color: var(--accent-color);
+}
+.order-container .box .status-badge.complete {
+    background-color: rgba(40, 167, 69, 0.15); /* Light green */
+    color: var(--success-color);
+}
+.order-container .box .status-badge.canceled {
+    background-color: rgba(220, 53, 69, 0.15); /* Light red */
+    color: var(--danger-color);
+}
+
+.order-container .box .detail {
+    margin-top: 3.5rem; /* Adjusted for status badge */
+    line-height: 1.8;
+    color: var(--light-text-color);
+    font-size: 1.6rem;
+    text-transform: capitalize;
+    flex-grow: 1; /* Allow details to take space */
+    padding-bottom: 1.5rem; /* Space before form */
+}
+
+.order-container .box .detail p {
+    margin-bottom: 0.5rem;
+}
+
+.order-container .box .detail span {
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.order-container .box form {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border-color); /* Separator for form */
+    padding-top: 1.5rem;
+}
+
+.order-container .box select[name="update_payment"] {
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.8rem;
+    font-size: 1.6rem;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    margin-bottom: 1.5rem;
+    box-shadow: var(--inner-shadow);
+}
+
+.order-container .box .flex-btn {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap; /* Allow buttons to wrap */
+}
+
+.order-container .box .flex-btn .btn {
+    flex: 1 1 45%; /* Allow buttons to grow, 45% for two per row */
+    font-size: 1.6rem;
+    padding: 1.2rem 1rem; /* Adjust padding for smaller buttons */
+    text-align: center;
+    border-radius: 0.8rem;
+    min-width: 120px; /* Ensure minimum width */
+}
+.order-container .box .flex-btn .btn[name="delete_order"] {
+    background-color: var(--danger-color);
+    color: var(--white);
+}
+.order-container .box .flex-btn .btn[name="delete_order"]:hover {
+    background-color: #c9302c; /* Darker red */
+}
+.order-container .box .flex-btn .btn[name="update_order"] {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+.order-container .box .flex-btn .btn[name="update_order"]:hover {
+    background-color: var(--accent-color);
+}
+
+/* --- Responsive Adjustments for Order Controls --- */
+@media (max-width: 768px) {
+    .order-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .order-controls .control-group {
+        width: 100%;
+        min-width: unset;
+    }
+    .order-controls .btn-group {
+        flex-direction: column; /* Stack buttons vertically */
+    }
+    .order-container .box .flex-btn .btn {
+        flex: 1 1 100%; /* Stack buttons in order box */
+    }
+}

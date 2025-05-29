@@ -1,782 +1,1301 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* admin_style.css */
+
+/* Import a modern font like Poppins from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* --- Root Variables for a Modern Palette --- */
 :root {
-  --green: #87a243;
-  --light-green: #e0ffcd;
-  --box-shadow: 0 0 10px rgb(0 0 0/15%);
+    --primary-color: #6c5ce7; /* A vibrant purple, slightly adjusted */
+    --accent-color: #0984e3; /* A bright blue for highlights */
+    --dark-green: #5acd4c; /* Closer to your original green but slightly richer */
+    --light-green: #e0ffcd; /* Your original light green, can be used for success/info backgrounds */
+
+    --text-color: #333; /* Darker text for readability */
+    --light-text-color: #777; /* Lighter text for secondary info */
+    --white: #fff;
+    --bg-color: #f4f7f6; /* A very light, subtle background */
+    --box-bg-color: #fff; /* White for content boxes */
+    --border-color: #eee; /* Light border color */
+
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Softer, more modern shadow */
+    --hover-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); /* Slightly more pronounced on hover */
+    --inner-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06); /* For input fields */
+
+    --success-color: #28a745; /* Standard success green */
+    --warning-color: #ffc107; /* Standard warning yellow */
+    --danger-color: #dc3545; /* Standard danger red */
+    --info-color: #17a2b8; /* Standard info blue */
 }
+
+/* --- Base Styles & Resets --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; /* Applied globally */
+    text-decoration: none;
+    outline: none;
+    border: none;
+}
+
 html {
-  font-size: 16px;
-  -ms-overflow-style: scrollbar;
-  -webkkit-tap-highlight-color: transparent;
-  font-family: sans-serif;
-  --ms-text-size-adjust: 100%;
-  -webkit-text-size-djust: 100%;
+    font-size: 62.5%; /* 1rem = 10px, makes rem calculations easier */
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -ms-overflow-style: scrollbar; /* Keeping for compatibility if needed */
+    -webkit-tap-highlight-color: transparent; /* Keeping as is */
+    -ms-text-size-adjust: 100%; /* Keeping as is */
+    -webkit-text-size-adjust: 100%; /* Keeping as is */
 }
+
 body {
-  background-image: url("../img/body-bg.jpg");
-  width: 100%;
+    background-image: url("../img/body-bg.jpg"); /* Keeping your background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Make background static */
+    background-color: var(--bg-color); /* Fallback/base color */
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* For sticky footer if applicable */
+    width: 100%; /* Keeping original width property */
 }
+
+/* --- Main Container --- */
 .main {
-  width: 85vw;
-  background: #fff;
-  box-shadow: 0 2px 6px 0 rgb(0 0 0 / 10%);
-  margin: 1rem auto;
-  margin-top: 10rem;
-  padding: 2%;
+    width: 85vw; /* Keeping original width */
+    max-width: 1200px; /* Adding a max-width for large screens */
+    background: var(--box-bg-color);
+    box-shadow: var(--shadow);
+    margin: 1rem auto;
+    margin-top: 12rem; /* Adjusted to account for fixed header */
+    padding: 3rem; /* Increased padding */
+    border-radius: 10px; /* Added rounded corners */
 }
+
 a {
-  text-decoration: none;
+    text-decoration: none;
+    color: var(--primary-color); /* Default link color */
+    transition: color 0.3s ease;
 }
+a:hover {
+    color: var(--accent-color);
+}
+
 ul {
-  list-style: none;
+    list-style: none;
 }
+
+/* --- Buttons --- */
 .btn {
-  line-height: 2;
-  background-color: #e0ffcd;
-  padding: 5px 35px;
-  display: inline-block;
-  border-radius: 20px;
-  color: #000;
-  text-transform: capitalize;
-  font-family: inherit;
-  font-size: 16px;
-  cursor: pointer;
-  user-select: none;
-  position: relative;
-  overflow: hidden;
-  vertical-align: middle;
-  transition: color 0.3s ease;
-  z-index: 2;
+    line-height: 1.5; /* Adjusted line height */
+    background-color: var(--light-green); /* Using light-green for default button */
+    padding: 1.2rem 3rem; /* Increased padding */
+    display: inline-block;
+    border-radius: 0.8rem; /* Slightly less rounded */
+    color: var(--text-color); /* Text color from palette */
+    text-transform: capitalize;
+    font-size: 1.6rem; /* Consistent font size */
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+    vertical-align: middle;
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease; /* Added transform */
+    z-index: 1; /* Adjusted z-index */
+    font-weight: 500;
 }
 .btn::before {
-  position: absolute;
-  content: "";
-  left: 0;
-  top: 0;
-  background: var(--green);
-  color: #fff;
-  height: 100%;
-  width: 0;
-  z-index: -1;
-  transition: width 0.3s ease;
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    background: var(--dark-green); /* Using dark-green for hover effect */
+    color: var(--white);
+    height: 100%;
+    width: 0;
+    z-index: -1;
+    transition: width 0.3s ease;
 }
-
 .btn:hover::before {
-  width: 100%;
+    width: 100%;
 }
 .btn:hover {
-  color: #fff;
+    color: var(--white);
+    transform: translateY(-2px); /* Slight lift on hover */
 }
+
+/* --- Messages (Empty, Success, Error) --- */
 .empty,
 .message {
-  border-radius: 0.5rem;
-  background: var(--green);
-  padding: 1.5rem;
-  text-align: center;
-  font-weight: 100%;
-  font-size: 1.5rem;
-  text-transform: capitalize;
-  line-height: 2;
-  color: #fff;
+    border-radius: 0.8rem; /* Consistent border radius */
+    background: var(--light-green); /* Default to light-green */
+    padding: 1.8rem; /* Increased padding */
+    text-align: center;
+    font-weight: 500; /* Adjusted font-weight */
+    font-size: 1.8rem; /* Larger font size */
+    text-transform: capitalize;
+    line-height: 1.6;
+    color: var(--dark-green); /* Text color for messages */
+    margin-bottom: 2rem; /* Spacing below messages */
+    box-shadow: var(--shadow);
+}
+/* Specific message types for better visual feedback */
+.message.success {
+    background: rgba(40, 167, 69, 0.1);
+    color: var(--success-color);
+}
+.message.error {
+    background: rgba(220, 53, 69, 0.1);
+    color: var(--danger-color);
+}
+.message.info {
+    background: rgba(23, 162, 184, 0.1);
+    color: var(--info-color);
 }
 .message {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.message .close-btn {
+    cursor: pointer;
+    font-size: 2.2rem;
+    color: inherit;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+.message .close-btn:hover {
+    opacity: 1;
 }
 
+
+/* --- Form Elements (Inputs, Textareas, Selects) --- */
 input,
 textarea,
-button,
 select {
-  background-color: transparent;
-  border-radius: 20px;
-  padding: 1rem;
-  border: none;
-  outline: none;
-  width: 100%;
-  margin: 0.6rem 0;
+    background-color: var(--box-bg-color); /* Background for inputs */
+    border-radius: 0.8rem; /* Consistent border radius */
+    padding: 1.2rem 1.5rem; /* Better padding */
+    border: 1px solid var(--border-color); /* Light border */
+    outline: none;
+    width: 100%;
+    margin: 0.8rem 0; /* Slightly more margin */
+    font-size: 1.6rem;
+    color: var(--text-color);
+    box-shadow: var(--inner-shadow); /* Subtle inner shadow */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(108, 92, 231, 0.25); /* Focus ring effect */
+}
+textarea {
+    resize: vertical; /* Allow vertical resize */
+    min-height: 10rem;
+}
 input[type="submit"] {
-  cursor: pointer;
+    background-color: var(--primary-color); /* Submit button color */
+    color: var(--white) !important;
+    cursor: pointer;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none; /* No border for submit */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+input[type="submit"]:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
 }
 
 .option {
-  background-color: var(--background-color);
-  cursor: pointer;
-  padding: 1rem;
+    background-color: var(--box-bg-color); /* Keeping original option style */
+    cursor: pointer;
+    padding: 1rem;
 }
 
 label {
-  text-transform: uppercase;
-  color: var(--lightgay);
+    text-transform: uppercase;
+    color: var(--light-text-color); /* Using light-text-color */
+    font-size: 1.4rem;
+    display: block; /* Ensures label takes full width */
+    margin-bottom: 0.5rem;
+    font-weight: 500;
 }
 
 form h1 {
-  text-align: center;
+    text-align: center;
+    font-size: 3.2rem; /* Larger heading */
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-weight: 600;
 }
 
 form span {
-  margin: 0 auto;
-  text-align: center;
-  text-transform: uppercase;
-  color: #5acd4c;
+    margin: 0 auto;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--dark-green); /* Using dark-green */
+    font-size: 1.4rem;
+    display: block;
+    margin-bottom: 1rem;
 }
 
 form p {
-  text-align: center;
-  color: var(--lightgay);
-  margin-bottom: 1rem;
+    text-align: center;
+    color: var(--light-text-color);
+    margin-bottom: 2rem; /* More spacing */
+    font-size: 1.6rem;
 }
-/*------form container------------*/
+
+/* --- Form Container (General Form Layout) --- */
 .main-container {
-  background: #fff;
-  width: 85vw;
-  min-width: 80vh;
-  box-shadow: var(--box-shadow);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem auto;
-  padding: 1rem 0;
+    background: var(--box-bg-color);
+    width: 85vw;
+    min-width: 80vh; /* This might be problematic, 80vh is very tall */
+    max-width: 900px; /* Added max-width */
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    padding: 2rem 0; /* Increased padding */
+    border-radius: 10px;
 }
 .form-container {
-  width: 60vw;
-  margin: 0 auto;
+    width: 90%; /* Responsive width */
+    max-width: 600px; /* Max width for forms */
+    margin: 0 auto;
 }
 .form-container input,
-select,
-textarea {
-  background-color: transparent;
-  box-shadow: var(--box-shadow);
+.form-container select,
+.form-container textarea {
+    background-color: var(--box-bg-color);
+    box-shadow: var(--inner-shadow);
 }
 textarea {
-  height: 200px;
+    height: 18rem; /* Adjusted height */
+    min-height: 10rem; /* Minimum height for better control */
 }
 .form-container p {
-  color: var(--green);
+    color: var(--dark-green);
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
 }
 .form-container sup {
-  color: red;
-  font-size: 1.2rem;
+    color: var(--danger-color); /* Red for required fields */
+    font-size: 1.4rem;
+    margin-left: 0.3rem;
 }
 .main-container input[type="submit"] {
-  color: #000 !important;
-  cursor: pointer;
+    color: var(--white) !important; /* Ensure white text */
+    background-color: var(--primary-color);
+}
+.main-container input[type="submit"]:hover {
+    background-color: var(--accent-color);
 }
 .form-container form {
-  width: 100%;
-  margin: 1rem auto;
-  background-color: rgb(255 255 255 / 80%);
-  box-shadow: var(--box-shadow);
-  padding: 2rem;
-  position: relative;
-  border-radius: 5px;
+    width: 100%;
+    margin: 1rem auto;
+    background-color: var(--box-bg-color); /* Changed to variable */
+    box-shadow: var(--shadow);
+    padding: 3rem; /* Increased padding */
+    position: relative;
+    border-radius: 10px; /* Consistent border radius */
 }
 .form-container form .input-field p {
-  text-transform: uppercase;
+    text-transform: capitalize; /* Changed from uppercase to capitalize for consistency */
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
 }
-
 .form-container form button {
-  width: 85%;
-  border-radius: 10px;
-  outline: none;
+    width: 100%; /* Full width button */
+    max-width: 250px; /* Max width for consistency */
+    border-radius: 0.8rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    padding: 1.2rem 2rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
-/*--------form container--------------*/
+.form-container form button:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+}
 
+/* --- General Box Container (for grids) --- */
 .box-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-  align-items: center;
-}
-
-.box-container .box {
-  margin: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr)); /* Adjusted min-width for better responsiveness */
+    gap: 2.5rem; /* Gap between boxes */
+    justify-content: center;
+    align-items: stretch; /* Ensures all boxes have same height */
 }
 
 form sup {
-  color: red;
+    color: var(--danger-color);
+    font-size: 1.2rem;
 }
+
 .heading {
-  text-align: center;
-  text-transform: uppercase;
-  padding: 1rem 0;
-  color: var(--orange);
-  margin-bottom: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 1.5rem 0; /* More padding */
+    color: var(--text-color); /* Changed color */
+    margin-bottom: 4rem; /* More spacing */
+    font-size: 3.5rem; /* Larger heading */
+    position: relative; /* For the underline effect */
+    font-weight: 600;
 }
+.heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8rem; /* Underline width */
+    height: 0.4rem; /* Underline thickness */
+    background-color: var(--primary-color); /* Underline color */
+    border-radius: 0.2rem;
+}
+
 section,
 .post-editor {
-  width: 75vw;
-  min-height: 100vh;
-  background: var(--bg-color2);
-  border-radius: 10px;
-  padding: 4%;
-  margin: 8% 4%;
-  margin-bottom: 2%;
+    width: 90vw; /* Increased width */
+    max-width: 1200px; /* Max width for large screens */
+    min-height: auto; /* Changed to auto or remove if not needed */
+    background: var(--box-bg-color); /* Using box background */
+    border-radius: 10px;
+    padding: 4%;
+    margin: 2rem auto; /* Centered with auto margins */
+    box-shadow: var(--shadow);
 }
-/*-----------suctom scroll bar---------*/
+
+/* --- Custom Scrollbar --- */
 ::-webkit-scrollbar {
-  width: 4px;
+    width: 0.8rem; /* Thicker scrollbar */
 }
 ::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 20px;
-  border-radius: 20px;
-  height: 50px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  background: #6d6d6d;
-  position: relative;
+    border-radius: 20px;
+    background: var(--primary-color); /* Changed color */
+    transition: background 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color); /* Hover color */
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
-  -webkit-border-radius: 20px;
-  margin-right: 10px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  margin-left: 10px;
-  border-radius: 20px;
+    background: var(--border-color); /* Lighter track color */
+    border-radius: 20px;
 }
-/*-----------login---------*/
+
+/* --- Login Page --- */
 #admin_login {
-  margin: 1rem auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    margin: 4rem auto; /* Adjusted margin */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 15rem); /* Adjust based on header/footer */
 }
 #admin_login .btn {
-  width: 100%;
+    width: 100%;
 }
 #admin_login .profile {
-  margin-top: -8rem;
-  text-align: center;
+    margin-top: -8rem;
+    text-align: center;
 }
 #admin_login .profile img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 3px solid var(--green);
-  padding: 0.5rem;
-  background: #fff;
+    width: 15rem; /* Larger image */
+    height: 15rem;
+    border-radius: 50%;
+    border: 0.4rem solid var(--primary-color); /* Primary color border */
+    padding: 0.5rem;
+    background: var(--white);
+    box-shadow: var(--shadow);
 }
 form h3 {
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 1.5rem;
-  margin: 1rem 0;
-
-  color: var(--green);
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 2.5rem; /* Larger heading */
+    margin: 2rem 0;
+    color: var(--text-color); /* General text color */
+    font-weight: 600;
 }
 form span {
-  color: var(--orange);
+    color: var(--dark-green); /* Changed to dark-green */
+    font-size: 1.4rem;
 }
 .form-container form input[type="submit"] {
-  width: 49%;
-  cursor: pointer;
-  margin: 0.5rem;
-  color: var(--green);
+    width: calc(50% - 0.5rem); /* Adjusted for better spacing */
+    cursor: pointer;
+    margin: 0.5rem 0.25rem; /* Smaller margins between buttons */
+    color: var(--white) !important;
+    background-color: var(--primary-color);
+}
+.form-container form input[type="submit"]:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
 }
 .post-editor textarea {
-  height: 15rem;
-  resize: none;
+    height: 20rem; /* Taller textarea */
+    resize: vertical; /* Allow vertical resizing */
 }
 .flex-btn {
-  display: flex;
+    display: flex;
+    gap: 1rem; /* Gap between buttons */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: center; /* Center buttons */
 }
-/*-----------header---------*/
-/*--------header------------------*/
+.flex-btn .btn {
+    flex-grow: 1; /* Allow buttons to grow */
+    min-width: 120px; /* Minimum width for buttons */
+}
+
+/* --- Header --- */
 header {
-  position: fixed;
-  top: 5%;
-  left: 7%;
-  width: 85vw;
-  padding: 1rem;
-  z-index: 101;
-  transition: 0.3s;
-  box-shadow: var(--box-shadow);
-  background-image: url("../img/body-bg.jpg");
+    position: fixed;
+    top: 0; /* Full top alignment */
+    left: 0; /* Full left alignment */
+    width: 100%; /* Full width */
+    padding: 1.5rem 7%; /* Adjusted padding */
+    z-index: 1000; /* Higher z-index */
+    transition: 0.3s ease;
+    box-shadow: var(--shadow);
+    background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+    backdrop-filter: blur(8px); /* Subtle blur effect */
+    border-bottom: 1px solid var(--border-color);
 }
 header.scrolled {
-  top: 0;
-  box-shadow: 0 5px 20px 0.1px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(20px);
+    box-shadow: var(--hover-shadow); /* More pronounced shadow when scrolled */
+    background-color: var(--box-bg-color);
 }
 .header.scrolled a:hover {
-  color: var(--green);
+    color: var(--primary-color);
 }
 .flex {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin: 0 auto;
+    max-width: 1200px; /* Max width for header content */
 }
 .navbar a {
-  margin: 0 1rem;
-  font-size: 1rem;
-  color: #000;
-  text-transform: uppercase;
+    margin: 0 1.5rem; /* More spacing */
+    font-size: 1.7rem; /* Larger font size */
+    color: var(--text-color); /* Default nav link color */
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.3s ease;
 }
 .navbar a:hover {
-  color: var(--green);
+    color: var(--primary-color);
 }
 .header .icons {
-  display: flex;
+    display: flex;
+    align-items: center;
 }
 .header .icons i {
-  margin-left: 1rem;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #000 !important;
+    margin-left: 2rem; /* More spacing */
+    font-size: 2.5rem; /* Larger icons */
+    cursor: pointer;
+    color: var(--text-color) !important; /* Default icon color */
+    transition: color 0.3s ease;
+}
+.header .icons i:hover {
+    color: var(--primary-color) !important;
 }
 #menu-btn {
-  display: none;
+    display: none;
+    font-size: 3rem; /* Larger menu icon */
 }
 .header .user-box {
-  position: absolute;
-  top: 120%;
-  right: 0rem;
-  background: rgb(255 255 255 / 80%);
-  box-shadow: var(--box-shadow);
-  border-radius: 0.5rem;
-  padding: 1rem;
-  text-align: center;
-  width: 20rem;
-  transform: scale(0);
-  transform-origin: top right;
-  line-height: 2;
+    position: absolute;
+    top: calc(100% + 1.5rem); /* Position below header with some margin */
+    right: 0rem;
+    background: var(--box-bg-color);
+    box-shadow: var(--hover-shadow); /* Stronger shadow */
+    border-radius: 0.8rem;
+    padding: 2rem; /* More padding */
+    text-align: center;
+    width: 25rem; /* Wider box */
+    transform: scale(0.8); /* Slightly smaller initially */
+    opacity: 0; /* Hidden initially */
+    transform-origin: top right;
+    line-height: 1.8;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 999;
 }
 .header .user-box .btn {
-  border-radius: 0.5rem;
-  padding: 0 1.5rem;
+    border-radius: 0.5rem;
+    padding: 0.8rem 2rem;
+    font-size: 1.5rem;
+    margin: 0.5rem 0; /* Spacing between buttons */
 }
 .logout-btn {
-  background: #000;
-  color: #fff;
-  text-transform: uppercase;
-  width: 11rem;
-  border-radius: 0.5rem;
-  margin: 0.5rem 0;
-  padding: 0.5rem 0;
+    background: var(--danger-color); /* Danger color for logout */
+    color: var(--white);
+    text-transform: uppercase;
+    width: 100%; /* Full width */
+    max-width: 15rem; /* Max width for button */
+    border-radius: 0.8rem;
+    margin-top: 1rem;
+    padding: 1rem 0;
+    transition: background-color 0.3s ease;
+}
+.logout-btn:hover {
+    background: var(--danger-color); /* Keep danger color for logout */
+    opacity: 0.9;
 }
 .header .user-box.active {
-  transform: scale(1);
-  transition: 0.2s linear;
+    transform: scale(1);
+    opacity: 1;
 }
-/*---------profile detail-------------*/
+
+/* --- Profile Detail (for user profile dropdown) --- */
 #user-btn {
-  font-size: 2rem;
-  box-shadow: var(--inner-box-shadow);
-  padding: 0.5rem;
-  color: var(--lightgay);
-  cursor: pointer;
-  transition: 0.6s;
+    font-size: 2.5rem; /* Larger user icon */
+    color: var(--text-color);
+    cursor: pointer;
+    transition: 0.3s ease;
 }
-#user-btn:hover,
+#user-btn:hover {
+    color: var(--primary-color);
+}
+.toggle { /* This looks like a hamburger menu for mobile */
+    margin-left: 1.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    font-size: 2.8rem;
+    display: none; /* Hidden by default, shown in media query */
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
 .toggle:hover {
-  box-shadow: var(--outer-shadow);
-  border-radius: 50%;
-}
-.toggle {
-  margin-left: 0.5rem;
-  padding: 0.5rem;
-  cursor: pointer;
-  font-size: 2rem;
-  display: none;
-  border-radius: unset;
-  transition: 0.6s;
+    color: var(--primary-color);
 }
 .profile-detail {
-  position: absolute;
-  top: 125%;
-  right: 2rem;
-  border-radius: 0.5rem;
-  background-color: #fff;
-  box-shadow: var(--box-shadow);
-  width: 22rem;
-  display: none;
-  padding: 1.5rem 0.5rem;
-  animation: 0.2s linear fadeIn;
-  text-align: center;
-  overflow: hidden;
+    position: absolute;
+    top: calc(100% + 1.5rem);
+    right: 0rem; /* Align to right */
+    border-radius: 0.8rem;
+    background-color: var(--box-bg-color);
+    box-shadow: var(--hover-shadow);
+    width: 28rem; /* Wider profile detail */
+    display: none;
+    padding: 2rem; /* More padding */
+    animation: fadeIn 0.3s ease forwards; /* Smoother animation */
+    text-align: center;
+    overflow: hidden;
+    z-index: 999;
 }
 @keyframes fadeIn {
-  0% {
-    transform: translateY(1rem);
-  }
+    0% { transform: translateY(1rem); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
 }
 .profile-detail.active {
-  display: inline-block;
+    display: block; /* Use block for consistency */
 }
 .profile-detail p {
-  padding-bottom: 0.7rem;
-  font-size: 1.5rem;
-
-  text-transform: capitalize;
-  color: var(--lightgay);
+    padding-bottom: 1rem;
+    font-size: 1.7rem;
+    text-transform: capitalize;
+    color: var(--light-text-color);
+    line-height: 1.6;
 }
 .profile-detail img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  padding: 0.5rem;
-  border: 3px solid var(--green);
+    width: 13rem; /* Larger image */
+    height: 13rem;
+    border-radius: 50%;
+    padding: 0.5rem;
+    border: 0.3rem solid var(--primary-color);
+    object-fit: cover; /* Ensure image covers the circle */
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
 }
 .profile-detail .flex-btn {
-  display: flex;
-  justify-content: space-evenly;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+    margin-top: 1.5rem;
 }
 .profile-detail .flex-btn .btn {
-  padding: 0.5rem 1.5rem;
-  margin: 0 1rem;
+    padding: 0.8rem 1.8rem;
+    flex-grow: 1;
+    font-size: 1.6rem;
 }
-/*-----------banner----------*/
+
+/* --- Banner --- */
 .banner {
-  background-image: url("../img/banner.jpg");
-  background-size: cover;
-  background-position: center;
-  background-color: var(--green);
-  width: 100%;
-  height: 50vh;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background-image: url("../img/banner.jpg"); /* Keeping your banner image */
+    background-size: cover;
+    background-position: center;
+    background-color: var(--primary-color); /* Fallback color */
+    width: 100%;
+    height: 35vh; /* Slightly reduced height for modernity */
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: var(--shadow);
+    margin-bottom: 3rem; /* Spacing below banner */
 }
 .banner h1 {
-  text-transform: uppercase;
-  color: #fff;
-  margin-left: 3rem;
+    text-transform: uppercase;
+    color: var(--white);
+    font-size: 5rem; /* Larger font for impact */
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    font-weight: 700;
 }
-.title2 {
-  border-top: 1px solid var(--green);
-  padding: 1rem 2rem;
-  text-transform: uppercase;
-  box-shadow: var(--box-shadow);
+.title2 { /* Breadcrumb */
+    border-top: 1px solid var(--border-color); /* Lighter border */
+    padding: 1.5rem 2rem;
+    text-transform: capitalize; /* Changed to capitalize */
+    box-shadow: var(--shadow);
+    background-color: var(--box-bg-color);
+    border-radius: 8px;
+    margin-bottom: 3rem;
+    font-size: 1.6rem;
+    text-align: center;
+    color: var(--light-text-color);
 }
 .title2 a {
-  color: var(--green);
+    color: var(--primary-color);
+    font-weight: 500;
+}
+.title2 span {
+    margin: 0 0.5rem;
+    color: var(--light-text-color);
 }
 
-/*-------dashboard-------------*/
-.box-container {
-  align-items: center;
-}
+/* --- Dashboard Section --- */
 .dashboard .box-container .box {
-  text-align: center;
-  box-shadow: var(--box-shadow);
-  border-radius: 0.5rem;
-  text-align: center;
-  padding: 1.5rem;
-  padding-bottom: 3rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    border-radius: 10px; /* Consistent border radius */
+    padding: 2.5rem; /* More generous padding */
+    display: flex; /* Use flexbox for vertical alignment */
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--box-bg-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.dashboard .box-container .box:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+.dashboard .box-container .box i { /* Icons added in HTML */
+    font-size: 5rem; /* Larger icons */
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
 }
 .dashboard .box-container .box h3 {
-  font-size: 2.7rem;
-  margin-bottom: -1rem;
+    font-size: 4.5rem; /* Larger numbers */
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    line-height: 1;
+    font-weight: 700;
 }
 .dashboard .box-container .box p {
-  padding: 1rem;
-  font-size: 1.8rem;
-  margin: 1rem 0;
-  text-transform: capitalize;
-  color: #555;
+    padding: 0.5rem 0;
+    font-size: 1.8rem; /* Larger paragraph text */
+    margin-top: 0; /* Resetting original margin */
+    margin-bottom: 2rem; /* Spacing below text */
+    text-transform: capitalize;
+    color: var(--light-text-color);
+    flex-grow: 1; /* Allows text to push button to bottom */
 }
-/*-------media screen-------------*/
+.dashboard .box-container .box .btn {
+    width: 100%; /* Full width button in box */
+    max-width: 20rem; /* Max width for dashboard buttons */
+    margin-top: auto; /* Pushes button to the bottom */
+}
+/* Specific welcome box styling */
+.welcome-box i {
+    color: var(--accent-color);
+}
+.welcome-box p {
+    font-size: 2.2rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+.welcome-box .btn {
+    background-color: var(--accent-color);
+    color: var(--white);
+}
+.welcome-box .btn:hover {
+    background-color: var(--primary-color);
+}
+/* Icons with specific colors */
+.dashboard .box-container .box .bx.bxs-check-circle { color: var(--success-color); }
+.dashboard .box-container .box .bx.bxs-x-circle { color: var(--danger-color); }
+.dashboard .box-container .box .bx.bxs-error-alt { color: var(--danger-color); }
+.dashboard .box-container .box .bx.bxs-truck { color: var(--warning-color); }
 
+
+/* --- Show Post Section (Example Card Styles) --- */
 .show-post .box-container .box {
-  position: relative;
-  margin: 1rem;
-  min-height: 20vh;
-  box-shadow: var(--box-shadow);
-  padding: 1rem;
-  border-radius: 10px;
+    position: relative;
+    margin: 1.5rem; /* More margin */
+    min-height: auto; /* Adjusted */
+    box-shadow: var(--shadow);
+    padding: 2rem; /* More padding */
+    border-radius: 10px;
+    background-color: var(--box-bg-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .show-post .box-container .box .image {
-  height: 20rem;
-  width: 100%;
-  object-fit: contain;
-  padding: 1rem;
-  margin: 1rem 0;
+    height: 20rem;
+    width: 100%;
+    object-fit: contain;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    background-color: var(--bg-color);
 }
 .show-post .box-container .box .status {
-  position: absolute;
-  left: -4%;
-  text-transform: uppercase;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  display: inline-block;
-  margin-bottom: 1rem;
-  background-color: var(--light-green);
+    position: absolute;
+    left: 2rem; /* Adjusted position */
+    top: 2rem;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    padding: 0.8rem 1.5rem; /* Larger padding */
+    border-radius: 0.5rem;
+    background-color: var(--light-green); /* Using light-green */
+    color: var(--dark-green);
+    font-weight: 600;
 }
 .show-post .box-container .box .price {
-  position: absolute;
-  right: 5%;
-  top: 5%;
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--orange);
+    position: absolute;
+    right: 2rem; /* Adjusted position */
+    top: 2rem;
+    font-size: 2.5rem; /* Larger price */
+    font-weight: bold;
+    color: var(--primary-color); /* Changed color */
 }
 .show-post .box-container .box .title {
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  text-align: center;
-  font-weight: bold;
-  color: var(--orange);
-  margin-bottom: 1rem;
+    font-size: 2rem; /* Larger title */
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-color); /* Changed color */
+    margin-bottom: 1.5rem;
 }
 .show-post .box-container .box .posts-content {
-  font-size: 1.3rem;
-  color: var(--lightgay);
-  line-height: 1.5;
-  padding: 1rem 0;
+    font-size: 1.6rem; /* Larger content */
+    color: var(--light-text-color);
+    line-height: 1.7;
+    padding: 1rem 0;
+    flex-grow: 1;
 }
-
 .show-post .box-container .box .btn {
-  margin: 0.2rem;
-  padding: 0.6rem 1.5rem;
-  width: 30%;
-  text-align: center;
+    margin: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    width: calc(33.33% - 1rem); /* Adjusted for 3 buttons in a row with gap */
+    text-align: center;
+    font-size: 1.5rem;
 }
-.show-post .box-container .box button {
-  width: 30%;
+.show-post .box-container .box button { /* If you use <button> tags directly */
+    width: calc(33.33% - 1rem);
+    margin: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.5rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.show-post .box-container .box button:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
 }
 .post-editor img {
-  width: 100%;
+    width: 100%;
+    max-height: 30rem;
+    object-fit: contain;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
 }
-/*-------read post-------------*/
+
+/* --- Read Post Section --- */
 .read-post {
-  display: flex;
-  flex-direction: column;
-  border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: var(--box-bg-color);
+    box-shadow: var(--shadow);
+    padding: 3rem;
 }
 .read-post form {
-  width: 100%;
-  border-radius: 0.5rem;
-  padding: 2rem;
-  box-shadow: var(--box-shadow);
-  position: relative;
+    width: 100%;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: none; /* No shadow on inner form, main .read-post has it */
+    position: relative;
+    background: transparent;
 }
 .read-post form .status {
-  top: 3%;
-  position: absolute;
-  border-radius: 0.5rem;
-  padding: 0.5rem 2rem;
-  font-size: 1.1rem;
-  color: #fff;
-  display: inline-block;
-  text-transform: uppercase;
+    top: 2rem;
+    left: 2rem;
+    position: absolute;
+    border-radius: 0.8rem;
+    padding: 0.8rem 2rem;
+    font-size: 1.4rem;
+    color: var(--white);
+    display: inline-block;
+    text-transform: uppercase;
+    background-color: var(--primary-color); /* Default status color */
+    font-weight: 600;
 }
+/* Specific status colors */
+.read-post form .status.active { background-color: var(--success-color); }
+.read-post form .status.deactive { background-color: var(--danger-color); }
+
 .read-post form .image {
-  width: 80%;
-  border-radius: 0.5rem;
-  margin-top: 1.5rem;
+    width: 100%; /* Full width image */
+    max-height: 40rem; /* Max height for images */
+    object-fit: contain;
+    border-radius: 0.8rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    background-color: var(--bg-color);
 }
 .read-post form .title {
-  color: var(--orange);
-  font-size: 2.5rem;
-  margin-top: 1.5rem;
-  text-align: center;
-  text-transform: uppercase;
+    color: var(--text-color);
+    font-size: 3.5rem; /* Larger title */
+    margin-top: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
 }
 .read-post form .content {
-  line-height: 2;
-  font-size: 1.2rem;
-  color: var(--lightgay);
-  padding: 1rem 0;
+    line-height: 1.8;
+    font-size: 1.7rem; /* Larger content */
+    color: var(--light-text-color);
+    padding: 1.5rem 0;
+    margin-bottom: 2rem;
 }
 .read-post form .icons {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1.5rem 0;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
 }
 .read-post form .icons div {
-  font-size: 1.5rem;
-  background: var(--orange);
-  padding: 0.5rem;
-  border-radius: 5px;
-  box-shadow: var(--box-shadow2);
+    font-size: 1.8rem; /* Larger icons text */
+    background: var(--light-green); /* Light green background */
+    padding: 1rem 1.5rem;
+    border-radius: 0.8rem;
+    box-shadow: var(--inner-shadow);
+    color: var(--dark-green);
+    font-weight: 500;
 }
 .read-post form .icons span {
-  color: #000;
+    color: var(--dark-green);
+    margin-left: 0.5rem;
 }
 .read-post form .icons i {
-  margin-right: 0.5rem;
+    margin-right: 0.8rem;
+    color: var(--primary-color);
+    font-size: 2.2rem;
 }
 .read-post form .flex-btn {
-  justify-content: space-between;
+    justify-content: space-between;
+    margin-top: 2rem;
 }
 .read-post form .flex-btn .btn {
-  width: 33%;
-  text-align: center;
+    width: calc(33.33% - 1rem); /* Adjusted for 3 buttons */
+    text-align: center;
+    font-size: 1.6rem;
 }
 
+/* --- Accounts Section (Users & Admins) --- */
 .accounts {
-  text-transform: capitalize;
-  line-height: 1.5;
+    text-transform: capitalize;
+    line-height: 1.7;
+    margin-bottom: 3rem;
 }
 .accounts h1 {
-  margin-bottom: 4rem;
-  color: var(--green);
+    margin-bottom: 4rem;
+    color: var(--text-color);
+    font-size: 3.5rem;
 }
 .accounts .box-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 30rem);
-  align-items: center;
-  justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr)); /* Adjusted min-width */
+    gap: 2.5rem;
+    justify-content: center;
 }
 .accounts .box-container .box {
-  box-shadow: var(--box-shadow);
-  padding: 2rem;
-  border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 2.5rem;
+    border-radius: 10px;
+    background-color: var(--box-bg-color);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.accounts .box-container .box:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+.accounts .box-container .box p {
+    font-size: 1.7rem;
+    color: var(--light-text-color);
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+.accounts .box-container .box p strong {
+    color: var(--text-color);
+    font-weight: 600;
 }
 .accounts span {
-  color: orange;
+    color: var(--primary-color); /* Changed color */
+    font-weight: 600;
 }
 .accounts .flex-btn {
-  justify-content: space-evenly;
-  margin-top: 1.5rem;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+    width: 100%;
 }
 .accounts .flex-btn .btn {
-  width: 100%;
-  text-align: center;
+    width: calc(50% - 1rem); /* Two buttons per row with gap */
+    text-align: center;
+    font-size: 1.5rem;
 }
 .accounts .profile {
-  text-align: center;
-  margin-top: -7rem;
+    text-align: center;
+    margin-top: -6rem; /* Adjusted negative margin */
+    margin-bottom: 2rem;
 }
 .accounts img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  padding: 0.5rem;
-  border: 3px solid var(--green);
+    width: 12rem; /* Larger image */
+    height: 12rem;
+    border-radius: 50%;
+    padding: 0.5rem;
+    border: 0.3rem solid var(--primary-color);
+    box-shadow: var(--shadow);
+    background: var(--white);
+    object-fit: cover;
 }
-/*-----------message container-------*/
+
+/* --- Message Container --- */
 .message-container .box-container .box {
-  box-shadow: var(--box-shadow);
-  text-align: center;
-  padding: 2rem;
-  border-radius: 10px;
-  line-height: 1.5;
+    box-shadow: var(--shadow);
+    text-align: center;
+    padding: 2.5rem; /* Increased padding */
+    border-radius: 10px;
+    line-height: 1.8;
+    background-color: var(--box-bg-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.message-container .box-container .box:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+.message-container .box-container .box p {
+    font-size: 1.6rem;
+    color: var(--light-text-color);
+    margin-bottom: 1.5rem;
 }
 .message-container .box-container .box .name {
-  text-transform: capitalize;
-  color: var(--green);
+    text-transform: capitalize;
+    color: var(--primary-color); /* Primary color for names */
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: block; /* Ensure name takes full width */
 }
-/*-------admin order-------------*/
+.message-container .box-container .box .email,
+.message-container .box-container .box .number {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+.message-container .box-container .box .flex-btn .btn {
+    width: 100%;
+    max-width: 15rem;
+    margin-top: 1rem;
+}
+
+
+/* --- Admin Order Section --- */
 .order-container .box-container .box {
-  box-shadow: var(--box-shadow);
-  padding: 1rem;
-  border-radius: 10px;
-  position: relative;
+    box-shadow: var(--shadow);
+    padding: 2.5rem; /* Increased padding */
+    border-radius: 10px;
+    position: relative;
+    background-color: var(--box-bg-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.order-container .box-container .box:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
 }
 .order-container .flex-btn {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    gap: 1rem;
 }
 .order-container .flex-btn .btn {
-  width: 45%;
-  text-align: center;
-  border-radius: 20px;
+    width: calc(50% - 0.5rem); /* Adjusted for two buttons */
+    text-align: center;
+    border-radius: 0.8rem;
+    font-size: 1.5rem;
 }
 .order-container .status {
-  position: absolute;
-  left: -4%;
-  text-transform: uppercase;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  display: inline-block;
-  margin-bottom: 1rem;
-  background: var(--light-green);
-}
-.order-container .detail {
-  margin-top: 3rem;
-  line-height: 1.5;
-  color: var(--lightgay);
-  text-transform: capitalize;
-}
-/*-------media screen-------------*/
-/*------------media screen----------*/
-@media (max-width: 991px) {
-  #menu-btn {
-    display: block;
-  }
-  .header .flex .navbar {
     position: absolute;
-    width: 100%;
-    padding: 0 2rem;
-    top: 130%;
-    left: 200%;
-    display: block;
-    right: 0;
-    border-top: 1px solid var(--green);
-    background: #fff;
-    transition: 0.3s ease;
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-  }
-  .header .flex .navbar.active {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  }
-  .header .flex .navbar a {
-    display: block;
-    margin: 2rem;
-  }
+    left: 2rem;
+    top: 2rem;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.8rem;
+    background: var(--light-green); /* Default light green */
+    color: var(--dark-green);
+    font-weight: 600;
+}
+/* Specific order status colors */
+.order-container .status.pending { background-color: rgba(255, 193, 7, 0.1); color: var(--warning-color); }
+.order-container .status.completed { background-color: rgba(40, 167, 69, 0.1); color: var(--success-color); }
+.order-container .status.canceled { background-color: rgba(220, 53, 69, 0.1); color: var(--danger-color); }
+.order-container .status.in-progress { background-color: rgba(0, 123, 255, 0.1); color: var(--info-color); }
 
-  .form-container {
-    width: 100%;
-  }
-  form {
-    width: 100%;
-  }
+
+.order-container .detail {
+    margin-top: 3rem;
+    line-height: 1.8;
+    color: var(--light-text-color);
+    text-transform: capitalize;
+    font-size: 1.6rem;
+}
+.order-container .detail span {
+    display: block; /* Each detail item on new line */
+    margin-bottom: 0.5rem;
+}
+.order-container .detail strong {
+    color: var(--text-color);
+    font-weight: 600;
+    margin-right: 0.5rem;
 }
 
+/* --- Media Queries (Responsiveness) --- */
+@media (max-width: 991px) {
+    html {
+        font-size: 55%; /* Adjust base font size for smaller screens */
+    }
+    .main {
+        width: 95vw;
+        margin-top: 10rem;
+        padding: 2.5rem;
+    }
+    header {
+        padding: 1.5rem 2rem; /* Reduced horizontal padding */
+    }
+    .header .flex {
+        padding: 0 1rem;
+    }
+    .header .flex .navbar {
+        position: absolute;
+        width: calc(100% - 4rem); /* Adjust width based on header padding */
+        padding: 0 2rem;
+        top: calc(100% + 1rem); /* Position below header */
+        left: 2rem;
+        display: block;
+        right: auto; /* Reset right */
+        border-top: 1px solid var(--border-color);
+        background: var(--box-bg-color);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        transform: translateY(-100%) scale(0.9); /* Initially off-screen */
+        opacity: 0;
+        transform-origin: top;
+        box-shadow: var(--hover-shadow);
+        border-radius: 8px;
+    }
+    .header .flex .navbar.active {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    .header .flex .navbar a {
+        display: block;
+        margin: 1.5rem 0; /* Adjusted margin */
+        text-align: center;
+        font-size: 1.8rem;
+    }
+    #menu-btn {
+        display: block; /* Show hamburger menu */
+    }
+    .header .icons {
+        margin-left: auto; /* Push icons to the right */
+    }
+    .header .user-box,
+    .profile-detail {
+        right: 2rem; /* Adjusted right position */
+    }
+    .banner h1 {
+        font-size: 4rem;
+    }
+    .heading {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+    }
+    .box-container {
+        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr)); /* Adjust min-width */
+        gap: 2rem;
+    }
+    .show-post .box-container .box .btn,
+    .show-post .box-container .box button {
+        width: calc(50% - 0.5rem); /* Two buttons per row on smaller screens */
+    }
+    .read-post form .flex-btn .btn {
+        width: calc(50% - 0.5rem);
+    }
+    .accounts .flex-btn .btn {
+        width: 100%; /* Stack buttons in accounts */
+    }
+    .form-container {
+        width: 95%; /* Make form container wider */
+    }
+}
 
-/* Style for the search form */
+@media (max-width: 768px) {
+    html {
+        font-size: 50%;
+    }
+    .main {
+        margin-top: 8rem;
+        padding: 2rem;
+    }
+    .banner h1 {
+        font-size: 3.5rem;
+    }
+    .heading {
+        font-size: 2.8rem;
+    }
+    .box-container {
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); /* Adjust min-width further */
+    }
+    .header .icons i {
+        margin-left: 1.5rem;
+        font-size: 2.2rem;
+    }
+    .header .user-box {
+        width: 22rem;
+        padding: 1.5rem;
+    }
+    .profile-detail {
+        width: 25rem;
+        padding: 1.5rem;
+    }
+    .show-post .box-container .box .btn,
+    .show-post .box-container .box button {
+        width: 100%; /* Stack buttons on very small screens */
+    }
+    .read-post form .flex-btn .btn {
+        width: 100%; /* Stack buttons */
+    }
+    .order-container .flex-btn .btn {
+        width: 100%; /* Stack buttons */
+    }
+}
+
+@media (max-width: 450px) {
+    .banner h1 {
+        font-size: 3rem;
+    }
+    .heading {
+        font-size: 2.5rem;
+    }
+    .box-container {
+        grid-template-columns: 1fr; /* Single column layout for most boxes */
+        gap: 1.5rem;
+    }
+    .dashboard .box-container .box .btn {
+        max-width: none; /* Full width for buttons in dashboard boxes */
+    }
+    .form-container form input[type="submit"] {
+        width: 100%; /* Stack submit buttons */
+        margin: 0.5rem 0;
+    }
+    .header .icons i {
+        margin-left: 1rem;
+        font-size: 2rem;
+    }
+    #menu-btn {
+        font-size: 2.5rem;
+    }
+}
+
+/* --- Styles for the search and delete buttons (from your original snippet) --- */
+/* These are integrated into the new button styles or given specific styling */
 form {
-    margin-bottom: 20px;
+    margin-bottom: 2rem; /* Adjusted margin */
 }
 
-input[type="text"] {
-    padding: 8px;
-    width: 200px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+input[type="text"].search-input { /* Added a class for specific search inputs */
+    padding: 1rem;
+    width: 25rem; /* Wider for better usability */
+    border: 1px solid var(--border-color);
+    border-radius: 0.8rem;
+    font-size: 1.6rem;
+    box-shadow: var(--inner-shadow);
+}
+input[type="text"].search-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(108, 92, 231, 0.25);
 }
 
 button[type="submit"] {
-    padding: 8px 15px;
-    background-color: #4CAF50;
-    color: #fff;
+    padding: 1.2rem 2rem; /* Increased padding */
+    background-color: var(--primary-color); /* Using primary color */
+    color: var(--white);
     border: none;
-    border-radius: 4px;
+    border-radius: 0.8rem;
     cursor: pointer;
+    font-size: 1.6rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
 }
 
-/* Style for the delete button */
 .delete-btn {
-    padding: 8px 15px;
-    background-color: #d9534f;
-    color: #fff;
+    padding: 1rem 2rem; /* Increased padding */
+    background-color: var(--danger-color); /* Using danger color */
+    color: var(--white);
     border: none;
-    border-radius: 4px;
+    border-radius: 0.8rem;
     cursor: pointer;
+    font-size: 1.6rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .delete-btn:hover {
-    background-color: #c9302c;
+    background-color: #c9302c; /* A slightly darker red */
+    transform: translateY(-2px);
 }
-

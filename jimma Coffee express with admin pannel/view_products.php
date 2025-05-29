@@ -103,7 +103,7 @@ $total_pages = ceil($total_products / $records_per_page);
 			<h1>shop</h1>
 		</div>
 		<div class="title2">
-			<a href="home.php">home </a><span>/ our shop</span>
+			<a href="index.php">home </a><span>/ our shop</span>
 		</div>
 		<section class="products">
 			<div class="box-container">
