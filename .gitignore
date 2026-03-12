@@ -1,9 +1,7 @@
 # XAMPP / Local config
 store/components/config.php
 
-# Uploaded product images (user content, not source code)
-store/admin_panel/image/
-store/image/
+
 
 # OS files
 .DS_Store
