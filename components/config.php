@@ -1,19 +1,24 @@
 <?php
-// Function to check multiple sources for an environment variable
-function get_db_var($name, $fallback = '') {
-    // Check getenv, $_ENV, and $_SERVER
-    $val = getenv($name);
-    if ($val !== false) return $val;
-    if (isset($_ENV[$name])) return $_ENV[$name];
-    if (isset($_SERVER[$name])) return $_SERVER[$name];
-    return $fallback;
-}
+/**
+ * Database Configuration
+ * Priority: DB_* > MYSQL_* > MYSQL* > Localhost
+ */
 
-// Database configuration
-$host = get_db_var('DB_HOST', get_db_var('MYSQLHOST', 'localhost'));
-$name = get_db_var('DB_NAME', get_db_var('MYSQLDATABASE', 'coffee'));
-$user = get_db_var('DB_USER', get_db_var('MYSQLUSER', 'root'));
-$pass = get_db_var('DB_PASS', get_db_var('MYSQLPASSWORD', ''));
+// Host
+$host = getenv('DB_HOST') ?: getenv('MYSQLHOST') ?: getenv('MYSQL_HOST') ?: 'localhost';
+
+// Database Name
+$name = getenv('DB_NAME') ?: getenv('MYSQLDATABASE') ?: getenv('MYSQL_DATABASE') ?: 'coffee';
+
+// User
+$user = getenv('DB_USER') ?: getenv('MYSQLUSER') ?: getenv('MYSQL_USER') ?: 'root';
+
+// Password - careful with empty password
+$pass = getenv('DB_PASS');
+if ($pass === false) $pass = getenv('MYSQLPASSWORD');
+if ($pass === false) $pass = getenv('MYSQL_ROOT_PASSWORD');
+if ($pass === false) $pass = getenv('MYSQL_PASSWORD');
+if ($pass === false) $pass = ''; // Local fallback
 
 define('DB_HOST', $host);
 define('DB_NAME', $name);
