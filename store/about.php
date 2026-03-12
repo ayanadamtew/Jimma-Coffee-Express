@@ -3,13 +3,15 @@ include 'components/connection.php';
 session_start();
 if (isset($_SESSION['user_id'])) {
 	$user_id = $_SESSION['user_id'];
-} else {
+}
+else {
 	$user_id = '';
 }
 
 if (isset($_POST['logout'])) {
 	session_destroy();
 	header("location: login.php");
+	exit;
 }
 ?>
 <link rel="stylesheet" href="style.css">
@@ -161,8 +163,8 @@ if (isset($_POST['logout'])) {
 						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 						consequat.</p>
 				</div>
-				<div class="left-arrow" onclick="nextSlide()"><i class="bx bxs-left-arrow-alt"></i></div>
-				<div class="right-arrow" onclick="prevSlide()"><i class="bx bxs-right-arrow-alt"></i></div>
+				<div class="left-arrow" onclick="prevSlide()"><i class="bx bxs-left-arrow-alt"></i></div>
+				<div class="right-arrow" onclick="nextSlide()"><i class="bx bxs-right-arrow-alt"></i></div>
 			</div>
 		</div>
 		<?php include 'components/footer.php'; ?>

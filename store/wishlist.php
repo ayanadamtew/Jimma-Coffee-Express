@@ -96,9 +96,9 @@ if ($select_wishlist->rowCount() > 0) {
 		$select_products = $conn->prepare("SELECT * FROM `products` WHERE id= ?");
 		$select_products->execute([$fetch_wishlist['product_id']]);
 		if ($select_products->rowCount() > 0) {
-			$fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)
+			$fetch_products = $select_products->fetch(PDO::FETCH_ASSOC);
 
-	?>
+?>
 				<form method="post" action="" class="box">
 					<input type="hidden" name="wishlist_id" value="<?= $fetch_wishlist['id']; ?>">
 					<img src="image/<?= $fetch_products['image']; ?>">

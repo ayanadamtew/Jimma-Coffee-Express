@@ -93,9 +93,9 @@ if ($select_cart->rowCount() > 0) {
 		$select_products = $conn->prepare("SELECT * FROM `products` WHERE id= ?");
 		$select_products->execute([$fetch_cart['product_id']]);
 		if ($select_products->rowCount() > 0) {
-			$fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)
+			$fetch_products = $select_products->fetch(PDO::FETCH_ASSOC);
 
-	?>
+?>
 				<form method="post" action="" class="box">
 					<input type="hidden" name="cart_id" value="<?= $fetch_cart['id']; ?>">
 					<img src="image/<?= $fetch_products['image']; ?>" class="img">

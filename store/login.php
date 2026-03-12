@@ -3,7 +3,7 @@ include 'components/connection.php';
 session_start();
 
 if (isset($_SESSION['user_id'])) {
-	header('location: home_loggedin.php');
+	header('location: home.php');
 	exit;
 }
 
@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
 			$_SESSION['user_id'] = $row['id'];
 			$_SESSION['user_name'] = $row['name'];
 			$_SESSION['user_email'] = $row['email'];
-			header('location: home_loggedin.php');
+			header('location: home.php');
 			exit;
 		}
 		else {

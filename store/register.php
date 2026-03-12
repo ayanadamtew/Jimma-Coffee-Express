@@ -3,7 +3,7 @@ include 'components/connection.php';
 session_start();
 
 if (isset($_SESSION['user_id'])) {
-	header('location: home_loggedin.php');
+	header('location: home.php');
 	exit;
 }
 
@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
 			$_SESSION['user_email'] = $email;
 
 			$success_msg[] = 'Account created! Welcome, ' . htmlspecialchars($name) . '.';
-			header('location: home_loggedin.php');
+			header('location: home.php');
 			exit;
 		}
 	}
