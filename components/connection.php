@@ -11,7 +11,11 @@ try {
 	$conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 }
 catch (PDOException $e) {
-	die('Database connection failed: ' . $e->getMessage() . '<br><br><b>Debug Info:</b> Host=' . DB_HOST . ', User=' . DB_USER . ', DB=' . DB_NAME);
+    $env_vars = [];
+    foreach ($_ENV as $k => $v) if (strpos($k, 'MYSQL') !== false) $env_vars[] = "$k=$v";
+    foreach ($_SERVER as $k => $v) if (strpos($k, 'MYSQL') !== false) $env_vars[] = "$k=$v";
+    
+	die('Database connection failed: ' . $e->getMessage() . '<br><br><b>Debug Info:</b> Host=' . DB_HOST . ', User=' . DB_USER . ', DB=' . DB_NAME . '<br><b>Detected Vars:</b> ' . (implode(', ', array_unique($env_vars)) ?: 'None found'));
 }
 
 if (!function_exists('unique_id')) {
