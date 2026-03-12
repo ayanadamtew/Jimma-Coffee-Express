@@ -11,7 +11,7 @@ try {
 	$conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 }
 catch (PDOException $e) {
-	die('Database connection failed. Please check your config.php settings.');
+	die('Database connection failed: ' . $e->getMessage() . '<br><br><b>Debug Info:</b> Host=' . DB_HOST . ', User=' . DB_USER . ', DB=' . DB_NAME);
 }
 
 if (!function_exists('unique_id')) {
