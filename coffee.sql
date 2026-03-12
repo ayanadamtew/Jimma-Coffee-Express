@@ -29,6 +29,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin`
 --
 
+DROP TABLE IF EXISTS `admin`;
+
 CREATE TABLE `admin` (
   `id` int(255) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -51,6 +53,8 @@ INSERT INTO `admin` (`id`, `name`, `email`, `password`, `profile`) VALUES
 -- Table structure for table `cart`
 --
 
+DROP TABLE IF EXISTS `cart`;
+
 CREATE TABLE `cart` (
   `id` varchar(20) NOT NULL,
   `user_id` varchar(20) NOT NULL,
@@ -71,6 +75,8 @@ INSERT INTO `cart` (`id`, `user_id`, `product_id`, `price`, `qty`) VALUES
 --
 -- Table structure for table `message`
 --
+
+DROP TABLE IF EXISTS `message`;
 
 CREATE TABLE `message` (
   `id` varchar(255) NOT NULL,
@@ -94,6 +100,8 @@ INSERT INTO `message` (`id`, `user_id`, `name`, `email`, `subject`, `message`) V
 --
 -- Table structure for table `orders`
 --
+
+DROP TABLE IF EXISTS `orders`;
 
 CREATE TABLE `orders` (
   `id` varchar(20) NOT NULL,
@@ -138,6 +146,8 @@ INSERT INTO `orders` (`id`, `user_id`, `name`, `number`, `email`, `address`, `ad
 -- Table structure for table `products`
 --
 
+DROP TABLE IF EXISTS `products`;
+
 CREATE TABLE `products` (
   `id` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -169,6 +179,8 @@ INSERT INTO `products` (`id`, `name`, `price`, `image`, `product_detail`, `statu
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
+
 CREATE TABLE `users` (
   `id` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -193,6 +205,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `user_type`) VALUES
 --
 -- Table structure for table `wishlist`
 --
+
+DROP TABLE IF EXISTS `wishlist`;
 
 CREATE TABLE `wishlist` (
   `id` varchar(255) NOT NULL,
