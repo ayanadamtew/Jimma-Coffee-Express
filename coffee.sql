@@ -1,11 +1,13 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
+-- Jimma Coffee Express — Database Seed
+-- Updated: Passwords are now bcrypt hashes (PHP password_hash / password_verify compatible)
 --
--- Host: 127.0.0.1
--- Generation Time: May 02, 2023 at 04:22 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 7.4.30
+-- TEST CREDENTIALS:
+--   User login:   mahi@test.com  / mahi786
+--   User login:   shalu@test.com / 12345
+--   Admin login:  selena ansari  / 1234
+--
+-- Host: 127.0.0.1 (XAMPP localhost)
+-- Server: MariaDB 10.4.25  |  PHP 7.4.30+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,8 +41,9 @@ CREATE TABLE `admin` (
 -- Dumping data for table `admin`
 --
 
+-- Admin password: 1234 (bcrypt hash below — use password_verify() in PHP)
 INSERT INTO `admin` (`id`, `name`, `email`, `password`, `profile`) VALUES
-(1, 'selena ansari', 'selenaAnsari@gmail.c', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'glitch.jpg');
+(1, 'selena ansari', 'selenaAnsari@gmail.com', '$2y$10$TMD0SFL6uFgp2kBG6s/9K.H2mTIH7GfKF.qA7U.vtBRlBUeay69J2', 'glitch.jpg');
 
 -- --------------------------------------------------------
 
@@ -178,11 +181,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
+-- User passwords are bcrypt hashes. Plain-text: mahi=mahi786, selena=selena786, Aiyman=12345, shalu=12345
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `user_type`) VALUES
-('UAVjN46f0bvXSKquej8S', 'mahi', 'mahinazir@gmail.com', 'mahi786', 'user'),
-('ir7qjxTxaQm9PM5drpEn', 'selena', 'selenaAnsari@gmail.com', 'selena786', 'user'),
-('GE2LLAWjKATiQRLHaa6O', 'Aiyman', 'aiymanAnsari@gmail.com', '12345', 'user'),
-('d5URvsP8VusCXQoCdMBG', 'shalu', 'shaluAnsari@gmail.com', '12345', 'user');
+('UAVjN46f0bvXSKquej8S', 'mahi', 'mahi@test.com', '$2y$10$nauQv9KUy/iJL.PYJh14.u23o6M7z.VCRQjqi6ulrX6zpftSQhGO.', 'user'),
+('ir7qjxTxaQm9PM5drpEn', 'selena', 'selena@test.com', '$2y$10$6SlKE5SrDrHNbERfRrhx/OqQWQHPFT.UUoiU2SkoVn/ROYIhXEqSm', 'user'),
+('GE2LLAWjKATiQRLHaa6O', 'Aiyman', 'aiyman@test.com', '$2y$10$blQwFWsE.HlMIZqDaAWGO.AUB.ckrlq/9tjAwLEIiM/SiDVKRDJMS', 'user'),
+('d5URvsP8VusCXQoCdMBG', 'shalu', 'shalu@test.com', '$2y$10$blQwFWsE.HlMIZqDaAWGO.AUB.ckrlq/9tjAwLEIiM/SiDVKRDJMS', 'user');
 
 -- --------------------------------------------------------
 

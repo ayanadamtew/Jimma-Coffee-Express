@@ -1,0 +1,20 @@
+# XAMPP / Local config
+store/components/config.php
+
+# Uploaded product images (user content, not source code)
+store/admin_panel/image/
+store/image/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# PHP error logs
+*.log
+error_log
