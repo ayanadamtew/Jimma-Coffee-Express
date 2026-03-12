@@ -12,11 +12,11 @@
 ## 🖼️ Interface Preview
 
 ````carousel
-![Hero Landing Page](store/image/screenshots/home.png)
+![Hero Landing Page](store/image/screenshots/home.jpg)
 <!-- slide -->
-![Shop & Product Listing](store/image/screenshots/shop.png)
+![Shop & Product Listing](store/image/screenshots/shop.jpg)
 <!-- slide -->
-![Enterprise Order Management](store/image/screenshots/orders.png)
+![Enterprise Order Management](store/image/screenshots/orders.jpg)
 ````
 
 ---
