@@ -107,7 +107,7 @@ CREATE TABLE `orders` (
   `product_id` varchar(20) NOT NULL,
   `price` varchar(10) NOT NULL,
   `qty` varchar(2) NOT NULL,
-  `date` date NOT NULL DEFAULT current_timestamp(),
+  `date` datetime NOT NULL DEFAULT current_timestamp(),
   `status` varchar(50) NOT NULL DEFAULT 'in progress',
   `payment_status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
