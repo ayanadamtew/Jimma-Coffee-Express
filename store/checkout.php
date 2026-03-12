@@ -30,7 +30,7 @@ if (isset($_POST['place_order'])) {
 	$varify_cart->execute([$user_id]);
 
 	if (isset($_GET['get_id'])) {
-		$get_product = $conn->prepare("SELECT * FROM `product` WHERE id=? LIMIT 1");
+		$get_product = $conn->prepare("SELECT * FROM `products` WHERE id=? LIMIT 1");
 		$get_product->execute([$_GET['get_id']]);
 		if ($get_product->rowCount() > 0) {
 			while ($fetch_p = $get_product->fetch(PDO::FETCH_ASSOC)) {
@@ -154,7 +154,7 @@ if (isset($_POST['place_order'])) {
 						<?php
 						$grand_total = 0;
 						if (isset($_GET['get_id'])) {
-							$select_get = $conn->prepare("SELECT * FROM `product` WHERE id=?");
+							$select_get = $conn->prepare("SELECT * FROM `products` WHERE id=?");
 							$select_get->execute([$_GET['get_id']]);
 							while ($fetch_get = $select_get->fetch(PDO::FETCH_ASSOC)) {
 								$sub_total = $fetch_get['price'];
@@ -175,7 +175,7 @@ if (isset($_POST['place_order'])) {
 							$select_cart->execute([$user_id]);
 							if ($select_cart->rowCount() > 0) {
 								while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
-									$select_products = $conn->prepare("SELECT * FROM `product` WHERE id=?");
+									$select_products = $conn->prepare("SELECT * FROM `products` WHERE id=?");
 									$select_products->execute([$fetch_cart['product_id']]);
 									$fetch_product = $select_products->fetch(PDO::FETCH_ASSOC);
 									$sub_total = ($fetch_cart['qty'] * $fetch_product['price']);

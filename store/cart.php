@@ -86,7 +86,7 @@ if (isset($_POST['empty_cart'])) {
 				$select_cart->execute([$user_id]);
 				if ($select_cart->rowCount() > 0) {
 					while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
-						$select_products = $conn->prepare("SELECT * FROM `product` WHERE id= ?");
+						$select_products = $conn->prepare("SELECT * FROM `products` WHERE id= ?");
 						$select_products->execute([$fetch_cart['product_id']]);
 						if ($select_products->rowCount() > 0) {
 							$fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)

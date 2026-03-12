@@ -4,14 +4,15 @@ session_start();
 
 function fetchProductDetails($conn, $product_id)
 {
-	$select_price = $conn->prepare("SELECT * FROM `product` WHERE id = ? LIMIT 1");
+	$select_price = $conn->prepare("SELECT * FROM `products` WHERE id = ? LIMIT 1");
 	$select_price->execute([$product_id]);
 	return $select_price->fetch(PDO::FETCH_ASSOC);
 }
 
 if (isset($_SESSION['user_id'])) {
 	$user_id = $_SESSION['user_id'];
-} else {
+}
+else {
 	$user_id = '';
 }
 
@@ -34,9 +35,11 @@ if (isset($_POST['add_to_wishlist'])) {
 
 	if ($verify_wishlist->rowCount() > 0) {
 		$warning_msg[] = 'Product already exists in your wishlist';
-	} elseif ($cart_num->rowCount() > 0) {
+	}
+	elseif ($cart_num->rowCount() > 0) {
 		$warning_msg[] = 'Product already exists in your cart';
-	} else {
+	}
+	else {
 		$fetch_price = fetchProductDetails($conn, $product_id);
 
 		$insert_wishlist = $conn->prepare("INSERT INTO `wishlist` (id, user_id, product_id, price) VALUES (?, ?, ?, ?)");
@@ -60,9 +63,11 @@ if (isset($_POST['add_to_cart'])) {
 
 	if ($verify_cart->rowCount() > 0) {
 		$warning_msg[] = 'Product already exists in your cart';
-	} elseif ($max_cart_items->rowCount() > 20) {
+	}
+	elseif ($max_cart_items->rowCount() > 20) {
 		$warning_msg[] = 'Cart is full';
-	} else {
+	}
+	else {
 		$fetch_price = fetchProductDetails($conn, $product_id);
 
 		$insert_cart = $conn->prepare("INSERT INTO `cart` (id, user_id, product_id, price, qty) VALUES (?, ?, ?, ?, ?)");
@@ -76,10 +81,10 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $records_per_page = 5;
 $offset = ($page - 1) * $records_per_page;
 
-$select_products = $conn->prepare("SELECT * FROM `product` ORDER BY price DESC LIMIT $offset, $records_per_page");
+$select_products = $conn->prepare("SELECT * FROM `products` WHERE status = 'active' ORDER BY price DESC LIMIT $offset, $records_per_page");
 $select_products->execute();
 
-$total_products = $conn->query("SELECT count(*) as total_records FROM `product`")->fetch()['total_records'];
+$total_products = $conn->query("SELECT count(*) as total_records FROM `products` WHERE status = 'active'")->fetch()['total_records'];
 $total_pages = ceil($total_products / $records_per_page);
 
 ?>
@@ -106,45 +111,56 @@ $total_pages = ceil($total_products / $records_per_page);
 		<section class="products">
 			<div class="box-container">
 				<?php
-				if ($select_products->rowCount() > 0) {
-					while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
-				?>
-						<form action="" method="post" class="box">
-							<img src="image/<?= $fetch_products['image']; ?>" class="img">
-							<div class="button">
-								<button type="submit" name="add_to_cart"><i class="bx bx-cart"></i></button>
-								<button type="submit" name="add_to_wishlist"><i class="bx bx-heart"></i></button>
-								<a href="view_page.php?pid=<?php echo $fetch_products['id']; ?>" class="bx bxs-show"></a>
-							</div>
-							<h3 class="name"><?= $fetch_products['name']; ?></h3>
-							<input type="hidden" name="product_id" value="<?= $fetch_products['id']; ?>">
-							<div class="flex">
-								<p class="price">price $<?= $fetch_products['price']; ?>/-</p>
-								<input type="number" name="qty" required min="1" value="1" max="99" maxlength="2" class="qty">
-							</div>
-							<a href="checkout.php?get_id=<?= $fetch_products['id']; ?>" class="btn">buy now</a>
+if ($select_products->rowCount() > 0) {
+	while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
+?>
+				<form action="" method="post" class="box">
+					<img src="image/<?= $fetch_products['image']; ?>" class="img">
+					<div class="button">
+						<button type="submit" name="add_to_cart"><i class="bx bx-cart"></i></button>
+						<button type="submit" name="add_to_wishlist"><i class="bx bx-heart"></i></button>
+						<a href="view_page.php?pid=<?php echo $fetch_products['id']; ?>" class="bx bxs-show"></a>
+					</div>
+					<h3 class="name">
+						<?= $fetch_products['name']; ?>
+					</h3>
+					<input type="hidden" name="product_id" value="<?= $fetch_products['id']; ?>">
+					<div class="flex">
+						<p class="price">price $
+							<?= $fetch_products['price']; ?>/-
+						</p>
+						<input type="number" name="qty" required min="1" value="1" max="99" maxlength="2" class="qty">
+					</div>
+					<a href="checkout.php?get_id=<?= $fetch_products['id']; ?>" class="btn">buy now</a>
 
-						</form>
+				</form>
 				<?php
-					}
-				} else {
-					echo '<p class="empty">no products added yet!</p>';
-				}
-				?>
+	}
+}
+else {
+	echo '<p class="empty">no products added yet!</p>';
+}
+?>
 			</div>
 			<!-- Pagination -->
 			<div class="pagination">
-				<?php if ($total_pages > 1) : ?>
-					<?php if ($page > 1) : ?>
-						<a href="?page=<?= $page - 1 ?>" class="prev">Previous</a>
-					<?php endif; ?>
-					<?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-						<a href="?page=<?= $i ?>" class="<?= ($page == $i) ? 'active' : '' ?>"><?= $i ?></a>
-					<?php endfor; ?>
-					<?php if ($page < $total_pages) : ?>
-						<a href="?page=<?= $page + 1 ?>" class="next">Next</a>
-					<?php endif; ?>
-				<?php endif; ?>
+				<?php if ($total_pages > 1): ?>
+				<?php if ($page > 1): ?>
+				<a href="?page=<?= $page - 1?>" class="prev">Previous</a>
+				<?php
+	endif; ?>
+				<?php for ($i = 1; $i <= $total_pages; $i++): ?>
+				<a href="?page=<?= $i?>" class="<?=($page == $i) ? 'active' : ''?>">
+					<?= $i?>
+				</a>
+				<?php
+	endfor; ?>
+				<?php if ($page < $total_pages): ?>
+				<a href="?page=<?= $page + 1?>" class="next">Next</a>
+				<?php
+	endif; ?>
+				<?php
+endif; ?>
 			</div>
 		</section>
 		<?php include 'components/footer.php'; ?>

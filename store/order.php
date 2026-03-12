@@ -48,7 +48,7 @@ if (isset($_POST['logout'])) {
 				$select_orders->execute([$user_id]);
 				if ($select_orders->rowCount() > 0) {
 					while ($fetch_order = $select_orders->fetch(PDO::FETCH_ASSOC)) {
-						$select_products = $conn->prepare("SELECT * FROM `product` WHERE id=?");
+						$select_products = $conn->prepare("SELECT * FROM `products` WHERE id=?");
 						$select_products->execute([$fetch_order['product_id']]);
 						if ($select_products->rowCount() > 0) {
 							while ($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)) {

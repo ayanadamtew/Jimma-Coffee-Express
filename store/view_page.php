@@ -3,7 +3,8 @@ include 'components/connection.php';
 session_start();
 if (isset($_SESSION['user_id'])) {
 	$user_id = $_SESSION['user_id'];
-} else {
+}
+else {
 	$user_id = '';
 }
 
@@ -24,10 +25,12 @@ if (isset($_POST['add_to_wishlist'])) {
 
 	if ($varify_wishlist->rowCount() > 0) {
 		$warning_msg[] = 'product already exist in your wishlist';
-	} else if ($cart_num->rowCount() > 0) {
+	}
+	else if ($cart_num->rowCount() > 0) {
 		$warning_msg[] = 'product already exist in your cart';
-	} else {
-		$select_price = $conn->prepare("SELECT * FROM `product` WHERE id = ? LIMIT 1");
+	}
+	else {
+		$select_price = $conn->prepare("SELECT * FROM `products` WHERE id = ? LIMIT 1");
 		$select_price->execute([$product_id]);
 		$fetch_price = $select_price->fetch(PDO::FETCH_ASSOC);
 
@@ -52,10 +55,12 @@ if (isset($_POST['add_to_cart'])) {
 
 	if ($varify_cart->rowCount() > 0) {
 		$warning_msg[] = 'product already exist in your cart';
-	} else if ($max_cart_items->rowCount() > 20) {
+	}
+	else if ($max_cart_items->rowCount() > 20) {
 		$warning_msg[] = 'cart is full';
-	} else {
-		$select_price = $conn->prepare("SELECT * FROM `product` WHERE id = ? LIMIT 1");
+	}
+	else {
+		$select_price = $conn->prepare("SELECT * FROM `products` WHERE id = ? LIMIT 1");
 		$select_price->execute([$product_id]);
 		$fetch_price = $select_price->fetch(PDO::FETCH_ASSOC);
 
@@ -88,42 +93,48 @@ if (isset($_POST['add_to_cart'])) {
 		</div>
 		<section class="view_page">
 			<?php
-			if (isset($_GET['pid'])) {
-				$pid = $_GET['pid'];
-				$select_products = $conn->prepare("SELECT * FROM `product` WHERE id = '$pid'");
-				$select_products->execute();
-				if ($select_products->rowCount() > 0) {
-					while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
+if (isset($_GET['pid'])) {
+	$pid = $_GET['pid'];
+	$select_products = $conn->prepare("SELECT * FROM `products` WHERE id = ?");
+	$select_products->execute([$pid]);
+	if ($select_products->rowCount() > 0) {
+		while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
 
 
-			?>
-						<form method="post">
-							<img src="image/<?php echo $fetch_products['image']; ?>">
-							<div class="detail">
-								<div class="price">$<?php echo $fetch_products['price']; ?>/-</div>
-								<div class="name"><?php echo $fetch_products['name']; ?></div>
-								<div class="detail">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-										tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-										quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-										consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-										cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-										proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+?>
+			<form method="post">
+				<img src="image/<?php echo $fetch_products['image']; ?>">
+				<div class="detail">
+					<div class="price">$
+						<?php echo $fetch_products['price']; ?>/-
+					</div>
+					<div class="name">
+						<?php echo $fetch_products['name']; ?>
+					</div>
+					<div class="detail">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-								</div>
-								<input type="hidden" name="product_id" value="<?php echo $fetch_products['id']; ?>">
-								<div class="button">
-									<button type="submit" name="add_to_wishlist" class="btn">add to wishlist<i class="bx bx-heart"></i></button>
-									<input type="hidden" name="qty" value="1" min="0" class="quantity">
-									<button type="submit" name="add_to_cart" class="btn">add to cart<i class="bx bx-cart"></i></button>
-								</div>
-							</div>
-						</form>
+					</div>
+					<input type="hidden" name="product_id" value="<?php echo $fetch_products['id']; ?>">
+					<div class="button">
+						<button type="submit" name="add_to_wishlist" class="btn">add to wishlist<i
+								class="bx bx-heart"></i></button>
+						<input type="hidden" name="qty" value="1" min="0" class="quantity">
+						<button type="submit" name="add_to_cart" class="btn">add to cart<i
+								class="bx bx-cart"></i></button>
+					</div>
+				</div>
+			</form>
 			<?php
-					}
-				}
-			}
-			?>
+		}
+	}
+}
+?>
 		</section>
 		<?php include 'components/footer.php'; ?>
 	</div>
