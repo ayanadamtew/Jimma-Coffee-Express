@@ -3,13 +3,34 @@ include 'components/connection.php';
 session_start();
 if (isset($_SESSION['user_id'])) {
 	$user_id = $_SESSION['user_id'];
-} else {
+}
+else {
 	$user_id = '';
 }
 
 if (isset($_POST['logout'])) {
 	session_destroy();
 	header("location: login.php");
+	exit;
+}
+
+if (isset($_POST['submit-btn'])) {
+	$name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+	$email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
+	$number = filter_var($_POST['number'], FILTER_SANITIZE_STRING);
+	$message = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
+
+	$select_message = $conn->prepare("SELECT * FROM `message` WHERE name = ? AND email = ? AND number = ? AND message = ?");
+	$select_message->execute([$name, $email, $number, $message]);
+
+	if ($select_message->rowCount() > 0) {
+		$warning_msg[] = 'message already sent';
+	}
+	else {
+		$insert_message = $conn->prepare("INSERT INTO `message`(id, user_id, name, email, subject, message) VALUES(?,?,?,?,?,?)");
+		$insert_message->execute([unique_id(), $user_id, $name, $email, 'Contact Us', $message]);
+		$success_msg[] = 'message sent successfully';
+	}
 }
 ?>
 <link rel="stylesheet" href="style.css">
@@ -72,19 +93,19 @@ if (isset($_POST['logout'])) {
 				</div>
 				<div class="input-field">
 					<p>your name <sup>*</sup></p>
-					<input type="text" name="name">
+					<input type="text" name="name" required>
 				</div>
 				<div class="input-field">
 					<p>your email <sup>*</sup></p>
-					<input type="email" name="email">
+					<input type="email" name="email" required>
 				</div>
 				<div class="input-field">
 					<p>your number <sup>*</sup></p>
-					<input type="text" name="number">
+					<input type="text" name="number" required>
 				</div>
 				<div class="input-field">
 					<p>your message <sup>*</sup></p>
-					<textarea name="message"></textarea>
+					<textarea name="message" required></textarea>
 				</div>
 				<button type="submit" name="submit-btn" class="btn">send message</button>
 			</form>
@@ -120,24 +141,6 @@ if (isset($_POST['logout'])) {
 				</div>
 			</div>
 		</div>
-		<?php include 'components/connection.php';
-
-		// Prepare and execute the SQL query to insert the data into the database
-		$sql = "INSERT INTO messages (name, email, number, message) VALUES ('$name', '$email', '$number', '$message')";
-
-		if ($conn->query($sql) === TRUE) {
-			echo "Message sent successfully";
-		} else {
-			echo "Error ";
-		}
-
-		// Close the database connection
-		$conn->close();
-		?>
-
-
-
-
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 	<script src="script.js"></script>
