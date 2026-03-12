@@ -1,5 +1,5 @@
 # XAMPP / Local config
-components/config.php
+# components/config.php (Removed from ignore to allow Railway deployment)
 
 
 
