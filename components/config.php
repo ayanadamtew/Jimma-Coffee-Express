@@ -16,13 +16,13 @@ function fetch_env_var($name, $fallback = '') {
 }
 
 // Hostname
-define('DB_HOST', fetch_env_var('DB_HOST', fetch_env_var('MYSQLHOST', fetch_env_var('MYSQL_HOST', 'localhost'))));
+define('DB_HOST', fetch_env_var('DB_HOST', fetch_env_var('MYSQLHOST', fetch_env_var('MYSQL_HOST', 'sql302.infinityfree.com'))));
 
 // Database Name
-define('DB_NAME', fetch_env_var('DB_NAME', fetch_env_var('MYSQLDATABASE', fetch_env_var('MYSQL_DATABASE', 'coffee'))));
+define('DB_NAME', fetch_env_var('DB_NAME', fetch_env_var('MYSQLDATABASE', fetch_env_var('MYSQL_DATABASE', 'if0_42711951_coffee'))));
 
 // Username
-define('DB_USER', fetch_env_var('DB_USER', fetch_env_var('MYSQLUSER', fetch_env_var('MYSQL_USER', 'root'))));
+define('DB_USER', fetch_env_var('DB_USER', fetch_env_var('MYSQLUSER', fetch_env_var('MYSQL_USER', 'if0_42711951'))));
 
 // Password
 // We treat empty string differently here
@@ -30,6 +30,6 @@ $pass = fetch_env_var('DB_PASS', null);
 if ($pass === null) $pass = fetch_env_var('MYSQLPASSWORD', null);
 if ($pass === null) $pass = fetch_env_var('MYSQL_PASSWORD', null);
 if ($pass === null) $pass = fetch_env_var('MYSQL_ROOT_PASSWORD', null);
-if ($pass === null) $pass = ''; // Final local fallback
+if ($pass === null) $pass = 'yA8KZ4F91oW00n'; // InfinityFree fallback
 
 define('DB_PASS', $pass);

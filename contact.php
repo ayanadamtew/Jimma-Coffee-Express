@@ -3,8 +3,7 @@ include 'components/connection.php';
 session_start();
 if (isset($_SESSION['user_id'])) {
 	$user_id = $_SESSION['user_id'];
-}
-else {
+} else {
 	$user_id = '';
 }
 
@@ -25,8 +24,7 @@ if (isset($_POST['submit-btn'])) {
 
 	if ($select_message->rowCount() > 0) {
 		$warning_msg[] = 'message already sent';
-	}
-	else {
+	} else {
 		$insert_message = $conn->prepare("INSERT INTO `message`(id, user_id, name, email, subject, message) VALUES(?,?,?,?,?,?)");
 		$insert_message->execute([unique_id(), $user_id, $name, $email, 'Contact Us', $message]);
 		$success_msg[] = 'message sent successfully';

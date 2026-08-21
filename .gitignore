@@ -1,7 +1,7 @@
 # XAMPP / Local config
 # components/config.php (Removed from ignore to allow Railway deployment)
 
-
+components/config.php
 
 # OS files
 .DS_Store
