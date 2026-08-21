@@ -20,14 +20,17 @@ html {
 body {
   background-image: url("img/body-bg.jpg");
   width: 100%;
+  overflow-x: hidden;
 }
 .main {
-  width: 85vw;
+  width: 100%;
+  max-width: 1200px;
   background: #fff;
   box-shadow: 0 2px 6px 0 rgb(0 0 0 / 10%);
   margin: 1rem auto;
   margin-top: 10rem;
   padding: 2%;
+  box-sizing: border-box;
 }
 a {
   text-decoration: none;
@@ -50,15 +53,17 @@ ul {
 }
 .icons sup {
   position: absolute;
-  top: 15%;
+  top: -20%;
+  right: -5px;
   background: #000;
   color: #fff;
   border-radius: 50%;
   width: 20px;
   height: 20px;
-  line-height: 15px;
+  line-height: 20px;
   text-align: center;
-  padding: 0.1rem;
+  padding: 0;
+  font-size: 0.8rem;
 }
 .empty {
   text-align: center;
@@ -117,6 +122,8 @@ textarea {
   margin: 0.5rem 0;
   border: 1px solid var(--green);
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 button {
   background: transparent;
@@ -153,10 +160,10 @@ button {
 /*--------header------------------*/
 header {
   position: fixed;
-  top: 5%;
-  left: 7%;
-  width: 85vw;
-  padding: 1rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 5%;
   z-index: 101;
   transition: 0.3s;
   box-shadow: var(--box-shadow);
@@ -189,12 +196,19 @@ header.scrolled {
 }
 .header .icons {
   display: flex;
+  align-items: center;
 }
 .header .icons i {
   margin-left: 1rem;
   font-size: 1.5rem;
   cursor: pointer;
   color: #000 !important;
+  position: relative; /* Ensure sup aligns properly */
+}
+.header .icons a {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 #menu-btn {
   display: none;
@@ -202,26 +216,30 @@ header.scrolled {
 .header .user-box {
   position: absolute;
   top: 120%;
-  right: 0rem;
+  right: 5%;
   background: rgb(255 255 255 / 80%);
   box-shadow: var(--box-shadow);
   border-radius: 0.5rem;
   padding: 1rem;
   text-align: center;
-  width: 20rem;
+  width: 90%;
+  max-width: 20rem;
   transform: scale(0);
   transform-origin: top right;
   line-height: 2;
+  z-index: 1000;
 }
 .header .user-box .btn {
   border-radius: 0.5rem;
   padding: 0 1.5rem;
+  width: 100%;
+  margin-top: 0.5rem;
 }
 .logout-btn {
   background: #000;
   color: #fff;
   text-transform: uppercase;
-  width: 11rem;
+  width: 100%;
   border-radius: 0.5rem;
   margin: 0.5rem 0;
   padding: 0.5rem 0;
@@ -246,12 +264,12 @@ header.scrolled {
 }
 .slider__slider {
   height: 80vh;
-  min-width: 100vw;
   width: 100%;
   scroll-snap-align: start;
   background-position: center center;
   background-size: cover;
   position: relative;
+  flex: 0 0 100%;
 }
 .slider__slider .slide-detail {
   position: absolute;
@@ -269,7 +287,7 @@ header.scrolled {
   position: absolute;
   content: "";
   background: #e2e2e244;
-  width: 380px;
+  width: 80%;
   height: 1px;
   bottom: -40%;
   left: 20%;
@@ -368,6 +386,8 @@ header.scrolled {
   color: gray;
 }
 .thumb .box-container .box img {
+  max-width: 100%;
+  height: auto;
   transition: all 800ms ease-in-out;
 }
 .thumb .box-container .box:hover img {
@@ -418,14 +438,31 @@ header.scrolled {
 }
 .shop .row {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.shop .row > img {
+  max-width: 100%;
+  height: auto;
+  flex: 1 1 300px;
+}
+.shop .row .row-detail {
+  max-width: 100%;
+  flex: 1 1 300px;
+}
+.shop .row .row-detail img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
 }
 .shop .row .top-footer {
-  margin-top: 2rem;
+  margin-top: 1rem;
   text-align: center !important;
   text-transform: capitalize;
-  font-size: 1.5vw;
-  padding: 3rem 1rem;
+  font-size: 1.5rem;
+  padding: 1rem;
 }
 .shop .box-container {
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
@@ -449,6 +486,11 @@ header.scrolled {
   color: #fff;
   margin-bottom: 2rem;
 }
+.shop-category .box img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
 .shop-category .detail {
   position: absolute;
   top: 20%;
@@ -468,6 +510,12 @@ header.scrolled {
   background-image: url("img/bg.jpg");
   line-height: 2;
   margin: 3rem 0;
+.services .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0 5%;
 }
 .services h3 {
   text-transform: capitalize;
@@ -484,7 +532,7 @@ header.scrolled {
 .about-category {
   max-width: 1200px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   margin: 2rem auto;
 }
 .about-category .box {
@@ -548,7 +596,8 @@ header.scrolled {
   border-radius: 5px;
   box-shadow: var(--box-shadow);
   color: gray;
-  width: 50vw;
+  width: 90%;
+  max-width: 50rem;
   margin: 0 auto;
   text-align: center;
   display: none;
@@ -625,9 +674,9 @@ header.scrolled {
   margin: 0 auto;
 }
 .form-container input,
-textarea {
+.form-container textarea {
   background-color: transparent;
-  width: 85%;
+  width: 100%;
 }
 textarea {
   height: 200px;
@@ -655,10 +704,10 @@ textarea {
   text-transform: uppercase;
 }
 .form-container form input {
-  width: 85%;
+  width: 100%;
 }
 .form-container form button {
-  width: 85%;
+  width: 100%;
   border-radius: 10px;
   outline: none;
 }
@@ -679,6 +728,16 @@ textarea {
   box-shadow: var(--box-shadow);
   line-height: 2;
   padding: 1rem 0;
+}
+@media (max-width: 480px) {
+  .address .box-container .box {
+    flex-direction: column;
+    text-align: center;
+  }
+  .address .box-container .box i {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
 }
 .address .box-container .box h4 {
   text-transform: uppercase;
@@ -711,7 +770,15 @@ textarea {
   margin-right: 0.5rem;
 }
 .top-footer input {
-  width: 40vw;
+  width: 100%;
+  max-width: 400px;
+}
+@media (max-width: 768px) {
+  .top-footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
 }
 footer {
   background-image: url("image/Slide3.JPG");
@@ -740,10 +807,10 @@ footer .overlay {
 }
 footer .inner-footer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   align-items: center;
   justify-content: center;
-  width: 81vw;
+  width: 95%;
 
   margin: 0 auto;
   padding: 3rem 0;
@@ -884,7 +951,8 @@ footer .bottom-footer {
 .products .cart-total {
   box-shadow: var(--box-shadow);
   border-radius: 0.5rem;
-  max-width: 50vw;
+  width: 95%;
+  max-width: 50rem;
   margin: 1rem auto;
   text-align: center;
   padding: 2rem;
@@ -905,17 +973,25 @@ footer .bottom-footer {
 }
 .view_page form {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(35px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   justify-content: center;
   align-items: center;
   box-shadow: var(--box-shadow);
   background: #fff;
-  margin-left: 1rem;
+  margin: 1rem auto;
   padding: 1.5rem;
+  gap: 2rem;
+}
+@media (max-width: 768px) {
+  .view_page form {
+    grid-template-columns: 1fr;
+  }
 }
 .view_page form img {
   padding: 0.5rem;
   box-shadow: var(--box-shadow);
+  max-width: 100%;
+  height: auto;
 }
 .view_page form .name {
   font-size: 2rem;
@@ -954,7 +1030,8 @@ footer .bottom-footer {
 .checkout .summary {
   box-shadow: var(--box-shadow);
   border-radius: 0.5rem;
-  width: 1000px;
+  width: 100%;
+  max-width: 1000px;
   padding: 1rem;
   margin: 1rem auto;
 }
@@ -1109,6 +1186,7 @@ footer .bottom-footer {
   box-shadow: var(--box-shadow);
   border-radius: 0.5rem;
   padding: 2rem;
+  width: 95%;
   max-width: 1200px;
   margin: 1rem auto;
 }
@@ -1124,9 +1202,9 @@ footer .bottom-footer {
   font-size: 1rem;
 }
 .order-detail .box-container .box .col .image {
-  height: 17rem;
+  max-height: 17rem;
   width: 100%;
-  object-fit: fill;
+  object-fit: contain;
   margin: 1rem 0;
 }
 .order-detail .box-container .box .col .title {
@@ -1222,6 +1300,90 @@ footer .bottom-footer {
   form {
     width: 100%;
   }
+  .slider__slider .slide-detail {
+    left: 10%;
+    width: 80%;
+  }
+  .slider__slider .slide-detail h1 {
+    font-size: 35px;
+  }
+  .slider__slider .slide-detail h1::before {
+    width: 100%;
+    left: 0;
+  }
+  .about .row,
+  .shop .row {
+    flex-direction: column;
+  }
+  .about .row .detail,
+  .about .row .img-box,
+  .shop .row .row-detail {
+    width: 100%;
+  }
+  .testimonial-container .container .testimonial-item {
+    width: 90%;
+  }
+  .main-container {
+    width: 95%;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .header .logo img {
+    width: 200px !important;
+  }
+  .banner h1 {
+    font-size: 1.5rem;
+    margin-left: 0;
+  }
+  .container .box h1 {
+    font-size: 2rem;
+  }
+  .shop .box-container {
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+  .footer-content {
+    position: static;
+    padding: 2rem 0;
+  }
+  footer .inner-footer {
+    width: 95%;
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .slider__slider .slide-detail h1 {
+    font-size: 25px;
+  }
+  .slider__slider .slide-detail p {
+    font-size: 16px;
+  }
+  .about-category {
+    grid-template-columns: 1fr;
+  }
+  .about-category .box .detail {
+    position: static;
+    padding: 1rem;
+    color: #000;
+  }
+  .about-category .box img {
+    width: 100%;
+  }
+  .thumb .box-container {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  }
+  .shop-category .box-container {
+      grid-template-columns: 1fr;
+  }
+  .products .box-container {
+      grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  }
+  .orders .box-container {
+      grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  }
 }
 
 /* Add this CSS for styling prev and next buttons */
@@ -1253,9 +1415,8 @@ footer .bottom-footer {
     background-color: var(--green);
     color: white;
 }
+}
 
 .pagination .prev:hover, .pagination .next:hover {
     background-color: var(--light-green);
 }
-
-

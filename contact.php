@@ -85,32 +85,33 @@ if (isset($_POST['submit-btn'])) {
 				</div>
 			</div>
 		</section>
-		<div class="form-container">
-			<form method="post">
-				<div class="title">
-					<img src="img/download.png" class="logo">
-					<h1>leave a message</h1>
-				</div>
-				<div class="input-field">
-					<p>your name <sup>*</sup></p>
-					<input type="text" name="name" required>
-				</div>
-				<div class="input-field">
-					<p>your email <sup>*</sup></p>
-					<input type="email" name="email" required>
-				</div>
-				<div class="input-field">
-					<p>your number <sup>*</sup></p>
-					<input type="text" name="number" required>
-				</div>
-				<div class="input-field">
-					<p>your message <sup>*</sup></p>
-					<textarea name="message" required></textarea>
-				</div>
-				<button type="submit" name="submit-btn" class="btn">send message</button>
-			</form>
-
-		</div>
+		<section class="contact-form">
+			<div class="form-container">
+				<form method="post">
+					<div class="title">
+						<img src="img/download.png" class="logo">
+						<h1>leave a message</h1>
+					</div>
+					<div class="input-field">
+						<p>your name <sup>*</sup></p>
+						<input type="text" name="name" required>
+					</div>
+					<div class="input-field">
+						<p>your email <sup>*</sup></p>
+						<input type="email" name="email" required>
+					</div>
+					<div class="input-field">
+						<p>your number <sup>*</sup></p>
+						<input type="text" name="number" required>
+					</div>
+					<div class="input-field">
+						<p>your message <sup>*</sup></p>
+						<textarea name="message" required></textarea>
+					</div>
+					<button type="submit" name="submit-btn" class="btn">send message</button>
+				</form>
+			</div>
+		</section>
 		<div class="address">
 			<div class="title">
 				<img src="img/download.png" class="logo">
